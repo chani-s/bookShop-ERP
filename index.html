@@ -1,37 +1,62 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>חנות הספרים שלי</title>
     <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto&family=Lato&family=Open+Sans&family=Montserrat&display=swap"
+        rel="stylesheet">
+
 </head>
+
 <body>
 
     <header>
         <h1 class="header-title">Bookshop ERP</h1>
         <div class="header-buttons">
             <button onclick="showNewBookForm()">+ ספר חדש</button>
-            <div>טען נתונים <select><option>עברית</option></select></div>
+            <div>טען נתונים <select>
+                    <option>עברית</option>
+                </select></div>
         </div>
     </header>
 
     <main>
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Price</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="book-line" class="book-line"></tbody>
-        </table>
-        <div id="new-book-form" style="display:none;">
-            <h3>הוספת ספר חדש</h3>
-            <input type="text" id="new-book-title" placeholder="שם הספר" required>
-            <input type="number" id="new-book-price" placeholder="מחיר" required>
-            <input type="text" id="new-book-image" placeholder="קישור לתמונה">
-            <button id="submit-book" onclick="addNewBook()">הוסף ספר</button>
+        <div class="books-details">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="book-line" class="book-line"></tbody>
+            </table>
+            <div id="new-book-form" style="display:none;">
+                <h3>הוספת ספר חדש</h3>
+                <input type="text" id="new-book-title" placeholder="שם הספר" required>
+                <input type="number" id="new-book-price" placeholder="מחיר" required>
+                <input type="text" id="new-book-image" placeholder="קישור לתמונה">
+                <button id="submit-book" onclick="addNewBook()">הוסף ספר</button>
+            </div>
+            <div id="book-details" class="book-details" style="display: none;">
+                <h2 id="book-title"></h2>
+                <img id="book-image" class="book-image" src="" alt="Book Image">
+                <p id="book-price"></p>
+                <div>
+                    <label for="book-rating">דירוג: </label>
+                    <select id="book-rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="pagination">
             <button>Previous</button>
@@ -53,4 +78,5 @@
     <script src="view.js"></script>
     <script src="controller.js"></script>
 </body>
+
 </html>

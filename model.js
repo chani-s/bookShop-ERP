@@ -1,7 +1,7 @@
 
 const Gbooks = [
     {
-        Id: 82,
+        catalogId: 82,
         title: "Harry Potter and the Philosopher's Stone",
         price: 55.9,
         image: "./imgs/1.jpg",
@@ -67,7 +67,7 @@ const Gbooks = [
         catalogId: 9,
         title: "Pollyanna",
         price: 55,
-        image: "./imgs/pollyanna.jpg",
+        image: "./imgs/polyanna.jpg",
         action: ["read", "update", "trash"]
     },
     {

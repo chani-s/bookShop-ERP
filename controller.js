@@ -1,8 +1,3 @@
-function addBook() {
-
-}
-
-
 function main() {
     console.log(renderBooks(Gbooks))
 }
@@ -14,14 +9,14 @@ function addNewBook(){
 
     if (newTitle && newPrice) {
         const newBook = {
-            Id: Gbooks.length + 1, // מזהה ייחודי חדש
+            catalogId: Gbooks.length + 1, // מזהה ייחודי חדש
             title: newTitle,
             price: newPrice,
             action: ["read", "update", "trash"]
         };
 
         if (newImg) {
-            newBook.image = "./" + newImg;
+            newBook.image = `.\{newImg}`;
         }
 
         Gbooks.push(newBook); 
