@@ -35,13 +35,13 @@
                 </thead>
                 <tbody id="book-line" class="book-line"></tbody>
             </table>
-            <div id="new-book-form" style="display:none;">
+            <form id="new-book-form" style="display:none;">
                 <h3>הוספת ספר חדש</h3>
                 <input type="text" id="new-book-title" placeholder="שם הספר" required>
                 <input type="number" id="new-book-price" placeholder="מחיר" required>
                 <input type="text" id="new-book-image" placeholder="קישור לתמונה">
                 <button id="submit-book" onclick="addNewBook()">הוסף ספר</button>
-            </div>
+            </form>
             <div id="book-details" class="book-details" style="display: none;">
                 <h2 id="book-title"></h2>
                 <img id="book-image" class="book-image" src="" alt="Book Image">
