@@ -8,11 +8,22 @@ const getBook = (book) => {
         <td>${book.title}</td>
         <td>₪${book.price}</td>
         <td>
-            <button>${book.action[0]}</button>
-            <button>${book.action[1]}</button>
-            <button>${book.action[2]}</button>
+            <button onclick="showBookDetails(${book.catalogId})">${book.action[0]}</button>
+            <button onclick="updateBook(${book.catalogId})">${book.action[1]}</button>
+            <button onclick="deleteBook(${book.catalogId})">${book.action[2]}</button>
         </td>
     </tr>`;
+}
+
+// render books for the current page
+function renderBooks(books) {
+    let booksStr = ``;
+    for (const book of books) {
+        booksStr += getBook(book);
+    }
+
+    document.getElementById("book-line").innerHTML = booksStr;
+    
 }
 
 // render pagination buttons
@@ -30,8 +41,6 @@ function renderPagination(books) {
 }
 
 
-
-
 // change page when a pagination button is clicked
 function changePage(page) {
     currentPage = page;
@@ -42,42 +51,40 @@ function changePage(page) {
 }
 
 
-// render books for the current page
-function renderBooks(books) {
-    let booksStr = ``;
-    for (const book of books) {
-        booksStr += getBook(book);
-    }
-
-    document.getElementById("book-line").innerHTML = booksStr;
-
-    // Add event listeners to rows for book details
-    const rows = document.querySelectorAll("#book-line tr");
-    rows.forEach((row, index) => {
-        row.addEventListener("click", () => {
-            showBookDetails(books[index]);
-        });
-    });
-}
-
-
 // Show New Book Form and hide Book Details
 const showNewBookForm = () => {
     document.getElementById("new-book-form").style.display = "block";
     document.getElementById("book-details").style.display = "none";
 };
 
-// Show Book Details and hide New Book Form
-function showBookDetails(book) {
-    document.getElementById("book-title").innerText = book.title;
-    document.getElementById("book-image").src = book.image || "./default-image.jpg"; // default image
-    document.getElementById("book-price").innerText = `מחיר: ₪${book.price}`;
 
-    // Toggle visibility
-    document.getElementById("book-details").style.display = "block";
-    document.getElementById("new-book-form").style.display = "none";
+function showBookDetails(catalogId) {
+    const book = Gbooks.find(b => b.catalogId === catalogId);
+    if (book) {
+        document.getElementById("book-title").innerText = book.title;
+        document.getElementById("book-image").src = book.image || "./default.jpg";
+        document.getElementById("book-price").innerText = `Price: ₪${book.price}`;
+        
+        document.getElementById("book-details").style.display = "block";
+        document.getElementById("new-book-form").style.display = "none";
+    }
 }
 
 
+// פונקציה לעדכן ספר
+function updateBook(catalogId) {
+    const book = Gbooks.find(b => b.catalogId === catalogId);
+    if (book) {
+              // כאן תוכל להוסיף את הלוגיקה לעדכון הספר, כמו טופס שממלא את הנתונים הקיימים
+        
+        console.log(`Updating book: ${book.title}`);
+    }
+}
 
-
+// פונקציה למחוק ספר
+function deleteBook(catalogId) {
+    // Gbooks = Gbooks.filter(book => book.catalogId !== catalogId);
+    // saveBooksToLocalStorage();
+    // renderBooks(Gbooks); // רענן את התצוגה לאחר המחיקה
+    // renderPagination(Gbooks); // עדכן את מספר הדפים
+}

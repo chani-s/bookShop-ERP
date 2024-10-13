@@ -1,39 +1,38 @@
 function main() {
-    // console.log(renderBooks(Gbooks))
-    //loadBooksFromLocalStorage();
+    loadBooksFromLocalStorage(); 
     renderBooks(Gbooks); 
     renderPagination(Gbooks); 
     changePage(1);
 }
 
 window.onload = () => {
-    //loadBooksFromLocalStorage();
-    renderPagination(Gbooks); // Create pagination buttons
-    changePage(1); // Show the first page when loading
-};
+    main(); 
+    };
 
 
-// // Save Gbooks array to localStorage
-// function saveBooksToLocalStorage() {
-//     localStorage.setItem("books", JSON.stringify(Gbooks));
-// }
+// Save Gbooks array to localStorage
+function saveBooksToLocalStorage() {
+    localStorage.setItem("books", JSON.stringify(Gbooks));
+}
 
+// Load books from localStorage into Gbooks
+function loadBooksFromLocalStorage() {
+    // let Gbooks = []; // מערך הספרים
 
-
-// // function loadBooksFromLocalStorage() {
-//     const savedBooks = localStorage.getItem("books");
-//     if (savedBooks) {
-//         const localStorageBooks = JSON.parse(savedBooks);
-//         Gbooks = [...Gbooks, ...localStorageBooks]; // מאחד את הספרים מ-localStorage עם אלה שבמודל
-//     }
-// }
-
+    const booksFromStorage = localStorage.getItem("books");
+    Gbooks.length = 0; // מנקים את המערך לפני הטעינה
+    if (booksFromStorage) {
+        const loadedBooks = JSON.parse(booksFromStorage);
+        // מוודא שהספרים החדשים מתווספים ל-Gbooks
+        Gbooks.push(...loadedBooks);
+    }
+}
 
 // Add new book and save it to localStorage
 function addNewBook() {
-    const newTitle = document.getElementById("new-book-title").value;
-    const newPrice = parseFloat(document.getElementById("new-book-price").value);
-    const newImg = document.getElementById("new-book-image").value;
+    const newTitle = document.getElementById("book-title-input").value;
+    const newPrice = parseFloat(document.getElementById("book-price-input").value);
+    const newImg = document.getElementById("book-image-input").value;
 
     if (newTitle && newPrice) {
         const existingBook = Gbooks.some(book => book.title === newTitle);
@@ -50,8 +49,7 @@ function addNewBook() {
         };
 
         Gbooks.push(newBook); 
-        
-        //saveBooksToLocalStorage(); // Save after adding a book
+        saveBooksToLocalStorage(); // Save after adding a book
         renderPagination(Gbooks); // Update pagination with new book
         changePage(Math.ceil(Gbooks.length / itemsPerPage)); // Show last page where the new book is
 
@@ -62,6 +60,6 @@ function addNewBook() {
     }
 }
 
+main(); 
 
 
-main();
