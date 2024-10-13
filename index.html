@@ -36,18 +36,18 @@
                 <tbody id="book-line" class="book-line"></tbody>
             </table>
             <form id="new-book-form" style="display:none;">
-                <h3>הוספת ספר חדש</h3>
-                <input type="text" id="new-book-title" placeholder="שם הספר" required>
-                <input type="number" id="new-book-price" placeholder="מחיר" required>
-                <input type="text" id="new-book-image" placeholder="קישור לתמונה">
-                <button id="submit-book" onclick="addNewBook()">הוסף ספר</button>
+                <h3>Add new Book</h3>
+                <input type="text" id="new-book-title" placeholder="Book title" required>
+                <input type="number" id="new-book-price" placeholder="Price" required>
+                <input type="text" id="new-book-image" placeholder="Image">
+                <button id="submit-book" onclick="addNewBook()">Add</button>
             </form>
             <div id="book-details" class="book-details" style="display: none;">
                 <h2 id="book-title"></h2>
                 <img id="book-image" class="book-image" src="" alt="Book Image">
                 <p id="book-price"></p>
                 <div>
-                    <label for="book-rating">דירוג: </label>
+                    <label for="book-rating">Rating: </label>
                     <select id="book-rating">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -59,12 +59,8 @@
             </div>
         </div>
         <div class="pagination">
-            <button>Previous</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>Next</button>
+            <!-- <button>Previous</button>
+            <button>Next</button> -->
         </div>
     </main>
 

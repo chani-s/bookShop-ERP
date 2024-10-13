@@ -1,3 +1,5 @@
+const itemsPerPage = 5;
+let currentPage = 1;
 
 const getBook = (book) => {
     return `
@@ -13,36 +15,69 @@ const getBook = (book) => {
     </tr>`;
 }
 
-const renderBooks = (books) => {
+// render pagination buttons
+function renderPagination(books) {
+    const pageCount = Math.ceil(books.length / itemsPerPage);
+    const paginationContainer = document.querySelector('.pagination');
+    paginationContainer.innerHTML = '';
+
+    for (let i = 1; i <= pageCount; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.innerText = i;
+        pageButton.onclick = () => changePage(i);
+        paginationContainer.appendChild(pageButton);
+    }
+}
+
+
+
+
+// change page when a pagination button is clicked
+function changePage(page) {
+    currentPage = page;
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = page * itemsPerPage;
+    const booksToShow = Gbooks.slice(startIndex, endIndex);
+    renderBooks(booksToShow);
+}
+
+
+// render books for the current page
+function renderBooks(books) {
     let booksStr = ``;
     for (const book of books) {
         booksStr += getBook(book);
     }
+
     document.getElementById("book-line").innerHTML = booksStr;
 
-    // הוספת מאזיני אירועים לשורות הספרים
+    // Add event listeners to rows for book details
     const rows = document.querySelectorAll("#book-line tr");
     rows.forEach((row, index) => {
         row.addEventListener("click", () => {
-            showBookDetails(books[index]); // קריאה לפונקציה להצגת פרטי הספר
+            showBookDetails(books[index]);
         });
     });
 }
 
+
+// Show New Book Form and hide Book Details
+const showNewBookForm = () => {
+    document.getElementById("new-book-form").style.display = "block";
+    document.getElementById("book-details").style.display = "none";
+};
+
+// Show Book Details and hide New Book Form
 function showBookDetails(book) {
-    // עדכון פרטי הספר בחלונית
     document.getElementById("book-title").innerText = book.title;
-    document.getElementById("book-image").src = book.image || "./default-image.jpg"; // תמונה ברירת מחדל אם אין תמונה
+    document.getElementById("book-image").src = book.image || "./default-image.jpg"; // default image
     document.getElementById("book-price").innerText = `מחיר: ₪${book.price}`;
 
-    // הצגת החלונית
+    // Toggle visibility
     document.getElementById("book-details").style.display = "block";
+    document.getElementById("new-book-form").style.display = "none";
 }
 
 
-
-const showNewBookForm = () => {
-    document.getElementById("new-book-form").style.display = "block";
-};
 
 

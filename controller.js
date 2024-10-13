@@ -1,8 +1,36 @@
 function main() {
-    console.log(renderBooks(Gbooks))
+    // console.log(renderBooks(Gbooks))
+    //loadBooksFromLocalStorage();
+    renderBooks(Gbooks); 
+    renderPagination(Gbooks); 
+    changePage(1);
 }
 
-function addNewBook(){
+window.onload = () => {
+    //loadBooksFromLocalStorage();
+    renderPagination(Gbooks); // Create pagination buttons
+    changePage(1); // Show the first page when loading
+};
+
+
+// // Save Gbooks array to localStorage
+// function saveBooksToLocalStorage() {
+//     localStorage.setItem("books", JSON.stringify(Gbooks));
+// }
+
+
+
+// // function loadBooksFromLocalStorage() {
+//     const savedBooks = localStorage.getItem("books");
+//     if (savedBooks) {
+//         const localStorageBooks = JSON.parse(savedBooks);
+//         Gbooks = [...Gbooks, ...localStorageBooks]; // מאחד את הספרים מ-localStorage עם אלה שבמודל
+//     }
+// }
+
+
+// Add new book and save it to localStorage
+function addNewBook() {
     const newTitle = document.getElementById("new-book-title").value;
     const newPrice = parseFloat(document.getElementById("new-book-price").value);
     const newImg = document.getElementById("new-book-image").value;
@@ -14,26 +42,26 @@ function addNewBook(){
             return;
         }
         const newBook = {
-            catalogId: Gbooks.length + 1, // מזהה ייחודי חדש
+            catalogId: Gbooks.length + 1, 
             title: newTitle,
             price: newPrice,
+            image: newImg,
             action: ["read", "update", "trash"]
         };
 
-        if (newImg) {
-            newBook.image = `{newImg}`;
-        }
-
         Gbooks.push(newBook); 
-        renderBooks(Gbooks); // רענון התצוגה של הספרים
+        
+        //saveBooksToLocalStorage(); // Save after adding a book
+        renderPagination(Gbooks); // Update pagination with new book
+        changePage(Math.ceil(Gbooks.length / itemsPerPage)); // Show last page where the new book is
 
         document.getElementById("new-book-form").reset();
-        document.getElementById("new-book-form").style.display = "none"; // הסתרת הטופס לאחר ההוספה
-    
+        document.getElementById("new-book-form").style.display = "none";
     } else {
         alert("please fill in title and price fields");
     }
-};
+}
+
 
 
 main();
