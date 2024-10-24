@@ -6,7 +6,7 @@ const getBook = (book) => {
     <tr>
         <td>${book.catalogId}</td>
         <td>${book.title}</td>
-        <td>₪${book.price}</td>
+        <td>$${book.price}</td>
         <td>
             <button onclick="showBookDetails(${book.catalogId})">${book.action[0]}</button>
             <button onclick="updateBook(${book.catalogId})">${book.action[1]}</button>
@@ -23,7 +23,7 @@ function renderBooks(books) {
     }
 
     document.getElementById("book-line").innerHTML = booksStr;
-    
+
 }
 
 // render pagination buttons
@@ -68,7 +68,7 @@ function showBookDetails(catalogId) {
         document.getElementById("book-title").innerText = book.title;
         document.getElementById("book-image").src = book.image || "./imgs/default.jpg";
         document.getElementById("book-price").innerText = `Price: ₪${book.price}`;
-        
+
         document.getElementById("book-details").style.display = "block";
     }
 }
@@ -76,61 +76,44 @@ function showBookDetails(catalogId) {
 
 function updateBook(catalogId) {
     const bookIndex = Gbooks.findIndex(b => b.catalogId === catalogId);
-    if (bookIndex !== -1) {
-        const book = Gbooks[bookIndex];
-        console.log(`Updating book: ${book.title}`);
-        
-        document.getElementById("form-title").textContent = `Update ${book.title}`;
-        document.getElementById("book-title-input").value = book.title;
-        document.getElementById("book-price-input").value = book.price;
-        document.getElementById("book-image-input").value = book.image;
+    const book = Gbooks[bookIndex];
+    console.log(`Updating book: ${book.title}`);
 
-        // הצגת הטופס
-        document.getElementById("new-book-form").style.display = "block";
+    document.getElementById("form-title").textContent = `Update ${book.title}`;
+    document.getElementById("book-title-input").value = book.title;
+    document.getElementById("book-price-input").value = book.price;
+    document.getElementById("book-image-input").value = book.image;
 
-        // טיפול בכפתור ה-submit
-        const submitButton = document.getElementById("submit-book");
-        submitButton.textContent = `Update`;
-        submitButton.dataset.bookIndex = bookIndex; // שמירה של אינדקס הספר בכפתור
+    // הצגת הטופס
+    document.getElementById("new-book-form").style.display = "block";
 
-        submitButton.onclick = function() {
-            // עדכון פרטי הספר
-            Gbooks[bookIndex].title = document.getElementById("book-title-input").value;
-            Gbooks[bookIndex].price = document.getElementById("book-price-input").value;
-            Gbooks[bookIndex].image = document.getElementById("book-image-input").value;
+    // טיפול בכפתור ה-submit
+    const submitButton = document.getElementById("submit-book");
+    submitButton.textContent = `Update`;
+    submitButton.dataset.bookIndex = bookIndex;
 
-            // שמירה מחדש ל-localStorage
-            localStorage.setItem("Gbooks", JSON.stringify(Gbooks));
-            console.log(`Book updated: ${Gbooks[bookIndex].title}`);
+    // הגדרת type="button" לכפתור כדי למנוע submit אוטומטי
+    submitButton.type = "button";
 
-            // הסתרת הטופס לאחר העדכון
-            document.getElementById("new-book-form").style.display = "none";
+    submitButton.onclick = function () {
+        // עדכון פרטי הספר
+        Gbooks[bookIndex].title = document.getElementById("book-title-input").value;
+        Gbooks[bookIndex].price = document.getElementById("book-price-input").value;
+        Gbooks[bookIndex].image = document.getElementById("book-image-input").value;
 
-            // רענון התצוגה לאחר העדכון
-            refreshBookList();
-        };
-    }
+        // שמירה מחדש ל-localStorage
+        localStorage.setItem("Gbooks", JSON.stringify(Gbooks));
+        console.log(`Book updated: ${Gbooks[bookIndex].title}`);
+
+        // הסתרת הטופס לאחר העדכון
+        document.getElementById("new-book-form").style.display = "none";
+
+        // רענון התצוגה לאחר העדכון
+        renderBooks(Gbooks);
+        renderPagination(Gbooks); 
+        changePage(currentPage);
+    };
 }
-
-function refreshBookList() {
-    const bookListElement = document.getElementById("book-line");
-    bookListElement.innerHTML = ""; // מנקה את רשימת הספרים הקיימת
-    Gbooks.forEach(book => {
-        const bookElement = document.createElement("tr");
-        bookElement.innerHTML = `
-            <td>${book.catalogId}</td>
-            <td>${book.title}</td>
-            <td>${book.price}</td>
-            <td><button onclick="updateBook(${book.catalogId})">Update</button></td>
-        `;
-        bookListElement.appendChild(bookElement);
-    });
-}
-
-// קריאה לפונקציה של רענון התצוגה ברגע העלאת הדף
-document.addEventListener("DOMContentLoaded", refreshBookList);
-
-
 
 
 
@@ -138,6 +121,6 @@ document.addEventListener("DOMContentLoaded", refreshBookList);
 function deleteBook(catalogId) {
     const book = Gbooks.find(b => b.catalogId === catalogId);
     console.log(`Deleting book: ${book.title}`);
-    
+
 
 }
