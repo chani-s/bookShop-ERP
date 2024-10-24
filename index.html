@@ -15,9 +15,12 @@
     <header>
         <h1 class="header-title">Bookshop ERP</h1>
         <div class="header-buttons">
-            <button onclick="showNewBookForm()">+ ספר חדש</button>
-            <div>טען נתונים <select>
-                    <option>עברית</option>
+            <button onclick="showNewBookForm()">+ new book</button>
+            <div>
+                <select>
+                    <option>English</option>
+                    <option>Hebrew</option>
+                    <option>Franch</option>
                 </select></div>
         </div>
     </header>
@@ -36,11 +39,13 @@
                 <tbody id="book-line" class="book-line"></tbody>
             </table>
             <form id="new-book-form" style="display:none;">
-                <h3>Add new Book</h3>
+                <h3 id = "form-title">Add new Book</h3>
                 <input type="text" id="book-title-input" placeholder="Book title" required>
                 <input type="number" id="book-price-input" placeholder="Price" required>
-                <input type="text" id="book-image-input" placeholder="Image">
+                <input type="text" id="book-image-input" placeholder="Image URL">
                 <button id="submit-book" onclick="addNewBook()">Add</button>
+                <button type="button" id="close-form" onclick="closeForm()">X</button>
+
             </form>
             <div id="book-details" class="book-details" style="display: none;">
                 <h2 id="book-title"></h2>

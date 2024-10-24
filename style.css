@@ -1,59 +1,117 @@
-h2 {
-    font-family: 'Lato', sans-serif; /* תתי כותרות */
-    font-size: 24px; /* גודל תת כותרת */
+ h2 {
+    font-family: 'Lato', sans-serif;
+    font-size: 24px;
     text-align: center;
 }
 
 .books-details {
-    display: flex; 
+    display: flex;
     flex-direction: row;
+    padding: 10px;
 }
 
 table {
     flex: 0 0 72%;
     border-collapse: collapse;
     width: 100%;
-}
-
-.book-details {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 25%; 
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin-left: 10px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.book-image {
-    width: 100%; /* או גודל ספציפי כמו 150px */
-    height: auto; /* שומר על פרופורציות התמונה */
-    max-width: 200px; /* גודל מקסימלי, ניתן לשנות לפי הצורך */
-    margin-bottom: 10px; /* רווח מתחת לתמונה */
+    table-layout: fixed; /* יישור רוחב התאים */
+    height: 320px; /* קיבוע גובה */
     
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* הצללת הטבלה */
+    border-radius: 10px; /* פינות עגולות */
+    border: 1px solid #ddd; /* מסגרת תואמת */
 }
 
+tbody {
+    display: block;
+    height: 100%;
+}
+
+thead, tr {
+    display: table;
+    width: 100%;
+}
 
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    white-space: nowrap; /* מונע שבירת שורות */
+    overflow: hidden;
+    text-overflow: ellipsis; /* מוסיף '...' אם התוכן ארוך מדי */
+    height: 40px; /* גובה השורה */
+}
+
+/* הגדרת רוחב שונה לכל עמודה */
+th:nth-child(1), td:nth-child(1) {
+    width: 10%; /* עמודת ה-ID */
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 50%; /* עמודת שם הספר */
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 15%; /* עמודת המחיר */
+}
+
+th:nth-child(4), td:nth-child(4) {
+    width: 25%; /* עמודת הפעולות (Action) */
+}
+
+
+.book-details {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 23%;
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.book-image {
+    width: 150px;
+    height: auto;
+    max-width: 200px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
 }
 
 header {
-    background-color: #f0f0f0;
+    background-color: #4CAF50;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: white;
 }
 
 .header-title {
@@ -66,15 +124,68 @@ header {
     gap: 10px;
 }
 
-footer {
-    background-color: #f0f0f0;
-    padding: 20px;
-    text-align: center;
-}
-
 .pagination {
     display: flex;
     justify-content: center;
     gap: 10px;
 }
+
+#new-book-form {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    z-index: 2000;
+    border-radius: 0 0 0 10px;
+}
+
+#new-book-form h3 {
+    color: white;
+    text-align: center;
+}
+
+#new-book-form input, #submit-book {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+#submit-book {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#submit-book:hover {
+    background-color: #45a049;
+}
+
+#close-form {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#close-form:hover {
+    background-color: darkred;
+}
+
 
