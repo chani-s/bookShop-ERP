@@ -1,6 +1,7 @@
 const itemsPerPage = 5;
 let currentPage = 1;
 
+
 const getBook = (book) => {
     return `
     <tr>
@@ -101,12 +102,9 @@ function updateBook(catalogId) {
         Gbooks[bookIndex].price = document.getElementById("book-price-input").value;
         Gbooks[bookIndex].image = document.getElementById("book-image-input").value;
 
-        // שמירה מחדש ל-localStorage
-        localStorage.setItem("Gbooks", JSON.stringify(Gbooks));
-        console.log(`Book updated: ${Gbooks[bookIndex].title}`);
-
         // הסתרת הטופס לאחר העדכון
         document.getElementById("new-book-form").style.display = "none";
+        saveBooksToLocalStorage(); // Save after adding a book
 
         // רענון התצוגה לאחר העדכון
         renderBooks(Gbooks);
