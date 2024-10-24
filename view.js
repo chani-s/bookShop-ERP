@@ -1,5 +1,7 @@
 const itemsPerPage = 5;
 let currentPage = 1;
+let isEditMode = false;
+
 
 
 const getBook = (book) => {
@@ -52,10 +54,28 @@ function changePage(page) {
 }
 
 
-// Show New Book Form and hide Book Details
-const showNewBookForm = () => {
+function openForm(isEdit) {
+    isEditMode = isEdit;
+
+    // שינוי הכותרת של הטופס בהתאם למצב
+    const formTitle = document.getElementById("form-title");
+    const submitButton = document.getElementById("submit-book");
+
+    if (isEditMode) {
+        formTitle.textContent = "Update Book";
+        submitButton.textContent = "Update";
+    } else {
+        document.getElementById("new-book-form").reset();
+        formTitle.textContent = "Add New Book";
+        submitButton.textContent = "Add";
+        submitButton.onclick = function() {
+            addNewBook();
+        };
+    }
+
+    // הצגת הטופס
     document.getElementById("new-book-form").style.display = "block";
-};
+}
 
 function closeForm() {
     document.getElementById("new-book-form").style.display = "none";
@@ -68,57 +88,9 @@ function showBookDetails(catalogId) {
     if (book) {
         document.getElementById("book-title").innerText = book.title;
         document.getElementById("book-image").src = book.image || "./imgs/default.jpg";
-        document.getElementById("book-price").innerText = `Price: ₪${book.price}`;
+        document.getElementById("book-price").innerText = `Price: $${book.price}`;
 
         document.getElementById("book-details").style.display = "block";
     }
 }
 
-
-function updateBook(catalogId) {
-    const bookIndex = Gbooks.findIndex(b => b.catalogId === catalogId);
-    const book = Gbooks[bookIndex];
-    console.log(`Updating book: ${book.title}`);
-
-    document.getElementById("form-title").textContent = `Update ${book.title}`;
-    document.getElementById("book-title-input").value = book.title;
-    document.getElementById("book-price-input").value = book.price;
-    document.getElementById("book-image-input").value = book.image;
-
-    // הצגת הטופס
-    document.getElementById("new-book-form").style.display = "block";
-
-    // טיפול בכפתור ה-submit
-    const submitButton = document.getElementById("submit-book");
-    submitButton.textContent = `Update`;
-    submitButton.dataset.bookIndex = bookIndex;
-
-    // הגדרת type="button" לכפתור כדי למנוע submit אוטומטי
-    submitButton.type = "button";
-
-    submitButton.onclick = function () {
-        // עדכון פרטי הספר
-        Gbooks[bookIndex].title = document.getElementById("book-title-input").value;
-        Gbooks[bookIndex].price = document.getElementById("book-price-input").value;
-        Gbooks[bookIndex].image = document.getElementById("book-image-input").value;
-
-        // הסתרת הטופס לאחר העדכון
-        document.getElementById("new-book-form").style.display = "none";
-        saveBooksToLocalStorage(); // Save after adding a book
-
-        // רענון התצוגה לאחר העדכון
-        renderBooks(Gbooks);
-        renderPagination(Gbooks); 
-        changePage(currentPage);
-    };
-}
-
-
-
-// פונקציה למחוק ספר
-function deleteBook(catalogId) {
-    const book = Gbooks.find(b => b.catalogId === catalogId);
-    console.log(`Deleting book: ${book.title}`);
-
-
-}
