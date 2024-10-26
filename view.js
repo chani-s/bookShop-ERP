@@ -1,6 +1,10 @@
 const itemsPerPage = 5;
 let currentPage = 1;
 let isEditMode = false;
+let sortDirection = {
+    title: 1,
+    price: 1
+};
 
 
 
@@ -93,4 +97,23 @@ function showBookDetails(catalogId) {
         document.getElementById("book-details").style.display = "block";
     }
 }
+
+
+
+function sortBooksBy(property) {
+    Gbooks.sort((a, b) => {
+        if (a[property] < b[property]) {
+            return -1 * sortDirection[property];
+        }
+        if (a[property] > b[property]) {
+            return 1 * sortDirection[property];
+        }
+        return 0;
+    });
+    sortDirection[property] *= -1; // הפיכה של כיוון המיון בפעם הבאה
+    renderBooks(Gbooks);
+    renderPagination(Gbooks);
+    changePage(currentPage);
+}
+
 
