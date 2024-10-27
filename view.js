@@ -72,14 +72,13 @@ function openForm(isEdit) {
         document.getElementById("new-book-form").reset();
         formTitle.textContent = "Add New Book";
         submitButton.textContent = "Add";
-        submitButton.onclick = function() {
+        submitButton.onclick = function () {
             addNewBook();
         };
     }
-
-    // הצגת הטופס
     document.getElementById("new-book-form").style.display = "block";
 }
+
 
 function closeForm() {
     document.getElementById("new-book-form").style.display = "none";
@@ -93,6 +92,14 @@ function showBookDetails(catalogId) {
         document.getElementById("book-title").innerText = book.title;
         document.getElementById("book-image").src = book.image || "./imgs/default.jpg";
         document.getElementById("book-price").innerText = `Price: $${book.price}`;
+        
+
+        // הוספת אפשרות לבחירת דירוג
+        const ratingElement = document.getElementById("book-rating");
+        ratingElement.value = book.rating;
+        ratingElement.onchange = function () {
+            updateBookRating(catalogId, this.value);
+        };
 
         document.getElementById("book-details").style.display = "block";
     }

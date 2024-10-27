@@ -19,6 +19,8 @@ function saveBooksToLocalStorage() {
     localStorage.setItem("books", JSON.stringify(Gbooks));
 }
 
+
+
 // Load books from localStorage into Gbooks
 function loadBooksFromLocalStorage() {
     // let Gbooks = []; // מערך הספרים
@@ -119,6 +121,14 @@ function deleteBook(catalogId) {
         changePage(currentPage); // שמירה על הדף הנוכחי בפגינציה
     }
 
+}
+
+function updateBookRating(catalogId, rating) {
+    const bookIndex = Gbooks.findIndex(b => b.catalogId === catalogId);
+    if (bookIndex !== -1) {
+        Gbooks[bookIndex].rating = rating;
+        saveBooksToLocalStorage();
+    }
 }
 
 

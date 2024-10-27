@@ -40,10 +40,10 @@
             </table>
             <form id="new-book-form" style="display:none;">
                 <h3 id = "form-title">Add new Book</h3>
-                <input type="text" id="book-title-input" name="book-title" placeholder="Book title" required>
-                <input type="number" id="book-price-input" name="book-price" placeholder="Price" required>
+                <input type="text" id="book-title-input" placeholder="Book title" required>
+                <input type="number" id="book-price-input"name = "book-price" placeholder="Price" required>
                 <input type="text" id="book-image-input" placeholder="Image URL">
-                <button id="submit-book" onclick="addNewBook()">Add</button>
+                <button id="submit-book" type="button" onclick="addNewBook()">Add</button>
                 <button type="button" id="close-form" onclick="closeForm()">X</button>
 
             </form>
