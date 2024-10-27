@@ -1,5 +1,4 @@
 
-
 function main() {
     if (localStorage.length === 0)
         saveBooksToLocalStorage();
@@ -23,13 +22,10 @@ function saveBooksToLocalStorage() {
 
 // Load books from localStorage into Gbooks
 function loadBooksFromLocalStorage() {
-    // let Gbooks = []; // מערך הספרים
-
     const booksFromStorage = localStorage.getItem("books");
-    Gbooks.length = 0; // מנקים את המערך לפני הטעינה
+    Gbooks.length = 0; 
     if (booksFromStorage) {
         const loadedBooks = JSON.parse(booksFromStorage);
-        // מוודא שהספרים החדשים מתווספים ל-Gbooks
         Gbooks.push(...loadedBooks);
     }
 }

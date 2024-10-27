@@ -14,12 +14,12 @@ table {
     flex: 0 0 72%;
     border-collapse: collapse;
     width: 100%;
-    table-layout: fixed; /* יישור רוחב התאים */
-    height: 320px; /* קיבוע גובה */
+    table-layout: fixed; 
+    height: 320px; 
     
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* הצללת הטבלה */
-    border-radius: 10px; /* פינות עגולות */
-    border: 1px solid #ddd; /* מסגרת תואמת */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+    border: 1px solid #ddd; 
 }
 
 tbody {
@@ -36,27 +36,26 @@ th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-    white-space: nowrap; /* מונע שבירת שורות */
+    white-space: nowrap; 
     overflow: hidden;
-    text-overflow: ellipsis; /* מוסיף '...' אם התוכן ארוך מדי */
-    height: 40px; /* גובה השורה */
+    text-overflow: ellipsis; 
+    height: 40px; 
 }
 
-/* הגדרת רוחב שונה לכל עמודה */
 th:nth-child(1), td:nth-child(1) {
-    width: 10%; /* עמודת ה-ID */
+    width: 10%; 
 }
 
 th:nth-child(2), td:nth-child(2) {
-    width: 50%; /* עמודת שם הספר */
+    width: 50%; 
 }
 
 th:nth-child(3), td:nth-child(3) {
-    width: 15%; /* עמודת המחיר */
+    width: 15%; 
 }
 
 th:nth-child(4), td:nth-child(4) {
-    width: 25%; /* עמודת הפעולות (Action) */
+    width: 25%; /
 }
 
 

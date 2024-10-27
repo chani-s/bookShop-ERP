@@ -61,7 +61,7 @@ function changePage(page) {
 function openForm(isEdit) {
     isEditMode = isEdit;
 
-    // שינוי הכותרת של הטופס בהתאם למצב
+    // Change the title of the form
     const formTitle = document.getElementById("form-title");
     const submitButton = document.getElementById("submit-book");
 
@@ -92,9 +92,7 @@ function showBookDetails(catalogId) {
         document.getElementById("book-title").innerText = book.title;
         document.getElementById("book-image").src = book.image || "./imgs/default.jpg";
         document.getElementById("book-price").innerText = `Price: $${book.price}`;
-        
 
-        // הוספת אפשרות לבחירת דירוג
         const ratingElement = document.getElementById("book-rating");
         ratingElement.value = book.rating;
         ratingElement.onchange = function () {
@@ -117,7 +115,7 @@ function sortBooksBy(property) {
         }
         return 0;
     });
-    sortDirection[property] *= -1; // הפיכה של כיוון המיון בפעם הבאה
+    sortDirection[property] *= -1; // Turn the side of the sort
     renderBooks(Gbooks);
     renderPagination(Gbooks);
     changePage(currentPage);
